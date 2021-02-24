@@ -1,6 +1,6 @@
-package com.lemon.silence.webservice;
+package com.lemon.silence.utils.webservice;
 
-import com.lemon.silence.webservice.bo.HttpResponseEntity;
+import com.lemon.silence.utils.bo.RemoteCallResponseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
@@ -40,8 +40,8 @@ public class CxfClient {
 		return client;
 	}
 
-	public static HttpResponseEntity invoke(Client cxfClient, String wdsl, String methodName, String sendData) {
-		HttpResponseEntity httpResponseEntity = new HttpResponseEntity();
+	public static RemoteCallResponseEntity invoke(Client cxfClient, String wdsl, String methodName, String sendData) {
+		RemoteCallResponseEntity remoteCallResponseEntity = new RemoteCallResponseEntity();
 		//double  check
 		if (cxfClient == null) {
 			synchronized (CxfClient.class) {
@@ -52,12 +52,12 @@ public class CxfClient {
 		}
 		try {
 			String recieveData = cxfClient.invoke(methodName, sendData)[0].toString();
-			httpResponseEntity.setContent(recieveData);
-			httpResponseEntity.setLength(recieveData.length());
+			remoteCallResponseEntity.setContent(recieveData);
+			remoteCallResponseEntity.setLength(recieveData.length());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return httpResponseEntity;
+		return remoteCallResponseEntity;
 	}
 }

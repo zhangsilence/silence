@@ -1,4 +1,4 @@
-package com.lemon.silence.webservice.bo;
+package com.lemon.silence.utils.bo;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import lombok.Data;
  * @date 2020/8/28 13:57
  */
 @Data
-public class HttpResponseEntity {
+public class RemoteCallResponseEntity {
 
 	private long length;
 

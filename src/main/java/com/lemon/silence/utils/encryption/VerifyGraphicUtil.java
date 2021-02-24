@@ -1,17 +1,21 @@
 package com.lemon.silence.utils.encryption;
 
+import com.lemon.silence.utils.bo.GraphicBean;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
+
 /**
  * 图形验证码生成工具类
  *
  * @author zhangxueqi
  * @version 1.0
  */
-public class VerifyUtil {
+public class VerifyGraphicUtil {
 	/**验证码字符集*/
 	private static final char[] CHARS = {
 			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -30,6 +34,7 @@ public class VerifyUtil {
 	/**字体大小*/
 	private static final int FONT_SIZE = 30;
 
+	private static Map<String,String> keyMap = new HashMap<>();
 	/**
 	 * 生成随机验证码及图片
 	 */
@@ -70,6 +75,9 @@ public class VerifyUtil {
 		map.put("code", sb.toString());
 		//图片
 		map.put("image", image);
+		String uuid = UUID.randomUUID().toString().replace("-", "");
+		map.put("uuid", uuid);
+		keyMap.put("uuid", uuid);
 		return map;
 	}
 
@@ -79,5 +87,19 @@ public class VerifyUtil {
 	public static Color getRandomColor() {
 		Random ran = new Random();
 		return new Color(ran.nextInt(256), ran.nextInt(256), ran.nextInt(256));
+	}
+
+	public static boolean verityGraphicCode(GraphicBean graphicBean){
+		boolean result = false;
+		if (keyMap.isEmpty()){
+			return result;
+		}
+		String graphicKey = keyMap.get(graphicBean.getUuid()).toLowerCase();
+		String graphicRequest = graphicBean.getGraphicCode().toLowerCase();
+		result = graphicRequest.equals(graphicKey);
+		if (result){
+			keyMap.remove(graphicBean.getUuid());
+		}
+		return result;
 	}
 }

@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@Api(tags = "用户管理")
+@Api(tags = "用户信息管理接口")
 @RequestMapping(path = "/lemon/api/user")
 public class UserController {
 

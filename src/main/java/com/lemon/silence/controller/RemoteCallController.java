@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@Api(tags = "远端调用demo")
+@Api(tags = "远端调用方式接口")
 @RequestMapping(path = "/api/lemon/remote")
 public class RemoteCallController {
 
