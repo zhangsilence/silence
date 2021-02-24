@@ -1,0 +1,48 @@
+server:
+  port: 8080
+  max-http-header-size: 2097152
+spring:
+  application:
+    name: silence
+  profiles:
+    active: dev
+---
+Spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: 2345d691-c37a-42b5-b4ec-2f5cf682f5b5
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yaml
+        namespace: 2345d691-c37a-42b5-b4ec-2f5cf682f5b5
+        group: DEFAULT_GROUP
+        enabled: true
+---
+Spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8081
+        eager: true
+        http-method-specify: true
+        filter:
+          url-patterns: "/lemon/**"
+      datasource:
+        ds1:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            dataId: ${spring.application.name}-flow
+            groupId: DEFAULT_GROUP
+            namespace: 2345d691-c37a-42b5-b4ec-2f5cf682f5b5
+            data-type: json
+            rule-type: flow
+        ds2:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            dataId: ${spring.application.name}-degrade
+            groupId: DEFAULT_GROUP
+            namespace: 2345d691-c37a-42b5-b4ec-2f5cf682f5b5
+            data-type: json
+            rule-type: degrade
