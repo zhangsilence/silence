@@ -5,19 +5,7 @@ spring:
   application:
     name: silence
   profiles:
-    active: dev
----
-spring:
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/lemon?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
-    driverClassName: com.mysql.cj.jdbc.Driver
-mybatis:
-  mapper-locations: classpath*:/mapper/**.xml
-restTemplate:
-  readTimeout: 5000
-  connectTimeout: 5000
+    active: uat
 ---
 Spring:
   cloud:
@@ -58,3 +46,15 @@ Spring:
             namespace: 2345d691-c37a-42b5-b4ec-2f5cf682f5b5
             data-type: json
             rule-type: degrade
+---
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/lemon?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driverClassName: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath*:/mapper/**.xml
+restTemplate:
+  readTimeout: 5000
+  connectTimeout: 5000
