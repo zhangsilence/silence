@@ -12,7 +12,7 @@ public class Constants {
 	/**异常分割符*/
 	public static final String EXCEPTION_SPLIT = ":";
 	/**SWAGGER地址*/
-	public static final String SWAGGER_ADDRESS = "http://localhost:8080/swagger-ui.html";
+	public static final String SWAGGER_ADDRESS = "http://localhost:8090/swagger-ui.html";
 	/**
 	 * 日期时间格式
 	 */
