@@ -3,7 +3,6 @@ package com.lemon.silence.mybatis.mapping;
 import com.lemon.silence.mybatis.dto.UserInfoResponse;
 import com.lemon.silence.mybatis.entity.UserInfo;
 import org.mapstruct.Mapper;
-import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 

@@ -1,6 +1,7 @@
 package com.lemon.silence.service;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lemon.silence.common.dto.ResponseMessageEntity;
 import com.lemon.silence.common.dto.ResponseMessageUntils;
 import com.lemon.silence.common.exception.SentinelBlockExceptionHandler;
@@ -8,6 +9,8 @@ import com.lemon.silence.mybatis.dto.UserInfoResponse;
 import com.lemon.silence.mybatis.entity.UserInfo;
 import com.lemon.silence.mybatis.mapper.UserInfoMapper;
 import com.lemon.silence.mybatis.mapping.UserMapping;
+import com.lemon.silence.utils.Paging.CommonUtils;
+import com.lemon.silence.utils.Paging.Paging;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +31,21 @@ public class UserService {
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 
-	@Autowired
-	private UserMapping userMapping;
+//	@Autowired
+//	private UserMapping userMapping;
 
 	@Transactional(rollbackFor = Exception.class)
-	public List<UserInfoResponse> getUserInfo() {
-		List<UserInfo> userInfoList = userInfoMapper.selectAll();
-		return userMapping.userInfoToUserInfoResponse(userInfoList);
+	public Paging<UserInfo> getUserInfo(Long pageSize, Long pageNo) {
+		//定义分页
+		Page<UserInfo> queryPage = new Page<>();
+		queryPage.setSize(pageSize);
+		queryPage.setCurrent(pageNo);
+		Page<UserInfo> userInfoPage = userInfoMapper.selectUserInfo(queryPage);
+		List<UserInfo> userInfoList = userInfoPage.getRecords();
+		Paging<UserInfo> paging = CommonUtils.getPaging(userInfoPage);
+		//userMapping.userInfoToUserInfoResponse(userInfoList)
+		paging.setList(userInfoList);
+		return paging;
 	}
 
 	@SentinelResource(value = "getUserInfos", blockHandler = "sentinelExceptionHandler", blockHandlerClass = SentinelBlockExceptionHandler.class)

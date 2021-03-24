@@ -25,7 +25,10 @@
     </select>
     <select id="selectAll" resultMap="BaseResultMap">
     select * from lemon.t_user_info;
-  </select>
+    </select>
+    <select id="selectUserInfo" resultMap="BaseResultMap">
+        select * from lemon.t_user_info;
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_user_info
     where user_id = #{userId,jdbcType=INTEGER}
