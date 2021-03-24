@@ -4,8 +4,10 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.lemon.silence.common.dto.ResponseMessageEntity;
 import com.lemon.silence.common.dto.ResponseMessageUntils;
 import com.lemon.silence.common.exception.SentinelBlockExceptionHandler;
+import com.lemon.silence.mybatis.dto.UserInfoResponse;
 import com.lemon.silence.mybatis.entity.UserInfo;
 import com.lemon.silence.mybatis.mapper.UserInfoMapper;
+import com.lemon.silence.mybatis.mapping.UserMapping;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +28,13 @@ public class UserService {
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 
+	@Autowired
+	private UserMapping userMapping;
+
 	@Transactional(rollbackFor = Exception.class)
-	public ResponseMessageEntity getUserInfo() {
+	public List<UserInfoResponse> getUserInfo() {
 		List<UserInfo> userInfoList = userInfoMapper.selectAll();
-		return ResponseMessageUntils.successs(userInfoList);
+		return userMapping.userInfoToUserInfoResponse(userInfoList);
 	}
 
 	@SentinelResource(value = "getUserInfos", blockHandler = "sentinelExceptionHandler", blockHandlerClass = SentinelBlockExceptionHandler.class)

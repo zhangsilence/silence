@@ -1,10 +1,11 @@
-# 基于java镜像创建新镜像
-FROM java:8
-# 作者
-MAINTAINER silence
-# 默认挂载
-VOLUME [ "/temp" ]
-# 将jar包添加到容器中并更名为*.jar
-ADD silence-0.0.1-SNAPSHOT.jar silence-0.0.1-SNAPSHOT.jar
-# 运行jar包
-ENTRYPOINT ["java","-jar","silence-0.0.1-SNAPSHOT.jar"]
+FROM openjdk:8-jdk-alpine
+
+VOLUME /tmp
+
+ARG DEPENDENCY=target/dependency
+
+COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
+COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
+
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.lemon.silence.SilenceApplication"]

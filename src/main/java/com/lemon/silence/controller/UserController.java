@@ -1,6 +1,8 @@
 package com.lemon.silence.controller;
 
 import com.lemon.silence.common.dto.ResponseMessageEntity;
+import com.lemon.silence.common.dto.ResponseMessageUntils;
+import com.lemon.silence.mybatis.dto.UserInfoResponse;
 import com.lemon.silence.mybatis.entity.UserInfo;
 import com.lemon.silence.service.UserService;
 import io.swagger.annotations.Api;
@@ -31,9 +33,9 @@ public class UserController {
 
 	@ApiOperation(value = "获取用户信息", notes = "获取用户信息")
 	@GetMapping("/info")
-	public ResponseMessageEntity<List<UserInfo>> getUserInfo() {
+	public ResponseMessageEntity<List<UserInfoResponse>> getUserInfo() {
 		log.info("获取用户信息成功");
-		return userService.getUserInfo();
+		return ResponseMessageUntils.successs(userService.getUserInfo());
 	}
 
 	@ApiOperation(value = "获取用户信息-sentinel", notes = "获取用户信息-sentinel")

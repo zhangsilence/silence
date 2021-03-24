@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableAsync
 @EnableScheduling
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @SpringBootApplication
 @Slf4j
 @MapperScan(basePackages = "com.lemon.silence.mybatis.mapper")
