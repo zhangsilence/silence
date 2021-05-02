@@ -2,7 +2,7 @@ package com.lemon.silence.controller;
 
 import com.lemon.silence.common.dto.ResponseMessageEntity;
 import com.lemon.silence.common.dto.ResponseMessageUntils;
-import com.lemon.silence.service.RemoteCallService;
+import com.lemon.silence.service.RestfulCallService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -22,15 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(tags = "远端调用方式接口")
 @RequestMapping(path = "/api/lemon/remote")
-public class RemoteCallController {
+public class RestfulCallController {
 
 	@Autowired
-	private RemoteCallService remoteCallService;
+	private RestfulCallService restfulCallService;
 
 	@ApiOperation(value = "获取用户信息", notes = "获取用户信息")
 	@PostMapping("/restTemplate")
 	public ResponseMessageEntity<String> getUserInfo() {
 		log.info("获取用户信息成功");
-		return ResponseMessageUntils.successs(remoteCallService.getContentInfo());
+		return ResponseMessageUntils.successs(restfulCallService.getContentInfo());
 	}
 }

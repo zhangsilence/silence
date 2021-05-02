@@ -5,16 +5,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lemon.silence.common.dto.ResponseMessageEntity;
 import com.lemon.silence.common.dto.ResponseMessageUntils;
 import com.lemon.silence.common.exception.SentinelBlockExceptionHandler;
-import com.lemon.silence.mybatis.dto.UserInfoResponse;
 import com.lemon.silence.mybatis.entity.UserInfo;
 import com.lemon.silence.mybatis.mapper.UserInfoMapper;
-import com.lemon.silence.mybatis.mapping.UserMapping;
 import com.lemon.silence.utils.Paging.CommonUtils;
 import com.lemon.silence.utils.Paging.Paging;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 /**
