@@ -32,7 +32,7 @@ public class ThreadConfig implements AsyncConfigurer {
 		executor.setMaxPoolSize(8);
 		//任务队列数
 		executor.setQueueCapacity(1000);
-		//存货时间
+		//存活时间
 		executor.setKeepAliveSeconds(60);
 		//设置阻塞策略
 		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());

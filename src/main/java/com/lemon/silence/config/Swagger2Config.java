@@ -25,8 +25,8 @@ public class Swagger2Config {
 	//1.声明api 文档的属性 构建起
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
-				.title("冰冰欢迎你")
-				.description("冰冰")
+				.title("私人项目调优")
+				.description("请勿传播")
 				.termsOfServiceUrl("http://www.baidu.com")
 				.contact(new Contact("lemon.com", "www.baidu.com", "zhangxueqi121@163.com"))
 				.version("1.0")
